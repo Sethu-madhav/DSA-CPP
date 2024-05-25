@@ -1,9 +1,7 @@
+
 #include <iostream>
 #include <vector>
 using namespace std;
-#define fast_cin()                    \
-    ios_base::sync_with_stdio(false); \
-    cin.tie(NULL);
 
 void printArray(vector<int> arr)
 {
@@ -14,30 +12,29 @@ void printArray(vector<int> arr)
     cout << endl;
 }
 
-int removeDuplicates(vector<int> &nums)
+void moveZeroes(vector<int> &nums)
 {
-    int j = 1;
-    for (int i = 1; i < nums.size(); i++)
+    int j = 0;
+    for (int i = 0; i < nums.size(); i++)
     {
-        if (nums[i] != nums[i - 1])
+        if (nums[i] != 0)
         {
-            nums[j] = nums[i];
-            j++;
+            nums[j++] = nums[i];
         }
     }
-    return j;
+    for (; j < nums.size(); j++)
+        nums[j] = 0;
 }
 
 int main()
 {
 
-    vector<int> nums = {1, 1, 2, 2, 3, 3, 4, 4, 5, 5};
-    int newSize = removeDuplicates(nums);
-    cout << "New size: " << newSize << endl;
-    for (int i = 0; i < newSize; i++)
-    {
-        cout << nums[i] << " ";
-    }
-    cout << endl;
+    vector<int> nums = {0, 1, 0, 2, 0, 3, 5};
+
+    cout << "Array before : ";
+    printArray(nums);
+    moveZeroes(nums);
+    cout << "Array after : ";
+    printArray(nums);
     return 0;
 }
